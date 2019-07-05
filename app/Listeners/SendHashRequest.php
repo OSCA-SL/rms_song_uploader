@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 
-class SendHashRequest /*implements ShouldQueue*/
+class SendHashRequest implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -35,14 +35,17 @@ class SendHashRequest /*implements ShouldQueue*/
         $id = $event->id;
         $file_path = $event->file_path;
 
+//        dd($file_path);
+
         $client = new Client();
-        $promise = $client->postAsync('localhost:8080/rms/register', [
-            RequestOptions::JSON => [
+        $promise = $client->postAsync('localhost:8088/rms/register', [], [
+            'json' => [
                 'songId' => $id,
                 'path' => $file_path
             ]
         ]);
 
-        $promise->wait();
+        $response = $promise->wait();
+//        dd($response);
     }
 }
