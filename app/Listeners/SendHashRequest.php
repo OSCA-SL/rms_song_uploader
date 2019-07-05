@@ -42,5 +42,7 @@ class SendHashRequest /*implements ShouldQueue*/
                 'path' => $file_path
             ]
         ]);
+
+        $promise->wait();
     }
 }
