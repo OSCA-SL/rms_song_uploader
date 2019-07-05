@@ -25,7 +25,7 @@ class SongUploaded
     public function __construct($id, $file_path)
     {
         $this->id = $id;
-        $this->file_path;
+        $this->file_path = $file_path;
     }
 
     /**
