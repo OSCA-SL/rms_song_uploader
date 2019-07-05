@@ -38,7 +38,7 @@ class SendHashRequest implements ShouldQueue
 //        dd($file_path);
 
         $client = new Client();
-        $promise = $client->postAsync('localhost:8088/rms/register', [], [
+        $promise = $client->postAsync('localhost:8080/rms/register', [], [
             'json' => [
                 'songId' => $id,
                 'path' => $file_path
