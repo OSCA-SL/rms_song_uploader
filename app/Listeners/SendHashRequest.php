@@ -53,7 +53,7 @@ class SendHashRequest /*implements ShouldQueue*/
                 $message = $e->getMessage();
                 $method = $e->getRequest()->getMethod();
                 $error = new Error;
-                $error->message = $message.", METHOD: ".$method;
+                $error->message = $message.", METHOD: ".$method.", BODY: ".$e->getRequest()->getBody();
                 $error->save();
             }
         );
