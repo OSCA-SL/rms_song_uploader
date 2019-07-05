@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SongUploaded;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SongController extends Controller
 {
@@ -46,6 +48,8 @@ class SongController extends Controller
                 $file = $request->file('song_file');
                 $file_name = $id.".".$file->getClientOriginalExtension();
                 $file->storeAs('public/songs', $file_name);
+
+                event(new SongUploaded($id, storage_path('app/public/songs/').$file_name));
 
                 return response("Successfully Uploaded the song", 200);
             }
