@@ -46,6 +46,5 @@ class SendHashRequest implements ShouldQueue
         ]);
 
         $response = $promise->wait();
-//        dd($response);
     }
 }
