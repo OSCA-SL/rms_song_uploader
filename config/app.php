@@ -2,6 +2,9 @@
 
 return [
 
+    'radio_username' => env('API_USERNAME', 'TheHAcker'),
+    'radio_password' => env('API_PASSWORD', 'sdfajksfh'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

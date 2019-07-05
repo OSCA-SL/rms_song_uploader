@@ -36,8 +36,8 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        $username = env('API_USERNAME', 'Hacker');
-        $password = Hash::make(env('API_PASSWORD', 'TheHacker'));
+        $username = config('app.API_USERNAME', 'Hacker');
+        $password = Hash::make(config('app.API_PASSWORD', 'TheHacker'));
 
         $user = $request->input('username');
         $pass = $request->input('password');
