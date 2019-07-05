@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Error;
 use App\Events\SongUploaded;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Queue\InteractsWithQueue;
@@ -43,7 +44,19 @@ class SendHashRequest /*implements ShouldQueue*/
                 'songId' => $id,
                 'path' => $file_path
             ]
-        ]);
+        ])->then(
+            function (ResponseInterface $res) use ($id){
+                $response = $res->getStatusCode();
+
+            },
+            function (RequestException $e){
+                $message = $e->getMessage();
+                $method = $e->getRequest()->getMethod();
+                $error = new Error;
+                $error->message = $message.", METHOD: ".$method;
+                $error->save();
+            }
+        );
 
         $response = $promise->wait();
     }
